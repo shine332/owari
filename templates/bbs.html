@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lnag="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="https://pgmemo.tokyo/data/filedir/1178_1.css?975">
+  <link rel="stylesheet" type="text/css" href="//img.atcoder.jp/public/ea27d23/css/base.css">
+  <link rel="shortcut icon" type="image/png" href="//img.atcoder.jp/assets/favicon.png">
+  <link rel="apple-touch-icon" href="//img.atcoder.jp/assets/atcoder.png">
+  <script src="//img.atcoder.jp/public/ea27d23/js/lib/jquery-1.9.1.min.js"></script>
+  <script src="//img.atcoder.jp/public/ea27d23/js/cdn/js.cookie.min.js"></script>
+  <script src="//img.atcoder.jp/public/ea27d23/js/cdn/moment.min.js"></script>
+  <script src="//img.atcoder.jp/public/ea27d23/js/cdn/moment_js-ja.js"></script>
+  <script>
+    var LANG = "ja";
+    var userScreenName = "";
+    var csrfToken = "XNVKnVNNhQJneduGBS5f8OSEb7SSsFQD1TAIfDsTk8g="
+  </script>
+  <script src="//img.atcoder.jp/public/ea27d23/js/utils.js"></script>
+  <script src="//img.atcoder.jp/public/ea27d23/js/base.js"></script>
+　<title>Yuki BBS 改造インスタンス </title>
+　<meta charset="UTF-8">
+　<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=1100">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;600;700&family=Tilt+Neon:XROT@31&family=Zen+Kurenaido&display=swap');
+    </style>
+    <style>      
+      :root {
+        --light-bg: #fff;
+        --light-fg: #000;
+        --light-border-bg: transparent;
+        --light-accent: #00f;
+        --light-link-color: var("--light-accent");
+        --light-button-bg: var("--light-accent");
+        --light-button-fg: var("--light-bg");
+        --dark-bg: #111;
+        --dark-fg: #ddd;
+        --dark-border-bg: transparent;
+        --dark-accent: #0ff;
+        --dark-link-color: var("--dark-accent");
+        --dark-button-bg: var("--dark-bg");
+        --dark-button-fg: var("--dark-fg");
+        --link-hover: #0cf;
+      }
+
+      * {
+        margin: 0;
+      }
+      
+      .example4 {
+        background: linear-gradient(
+            to right,
+            #c00,
+            #cc0,
+            #0c0,
+            #0cc,
+            #00c,
+            #c0c,
+          )
+          0 / 200%;
+        animation: 5s example4 linear infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      @keyframes example4 {
+        100% {
+          background-position: 200%;
+        }
+      }
+
+      .dark {
+        background-color: var("--dark-bg");
+        color: var("--dark-fg");
+      }
+
+      .dark input,
+      .dark textarea,
+      .dark select {
+        background-color: var("--dark-bg");
+        color: var("--dark-fg");
+        border: #ddd 1px solid;
+      }
+      
+      .dark button {
+        background-color: var("--dark-button-bg");
+        color: var("--dark-button-fg");
+        border: #ddd 1px solid;
+      }
+
+      .dark a {
+        color: var("--dark-link-color");
+      }
+      
+      a:hover {
+        color: var("--link-hover");
+      }
+      
+      .menu {
+        display: none;
+      }
+      .submit_menu {
+        display: inline-block;
+      }
+      .menu.active{
+        display: inline-block;
+      }
+      .menu-toggle-button{
+        display:block;
+      }
+      .button-4 {
+      appearance: none;
+      background-color: #FAFBFC;
+      border: 1px solid rgba(27, 31, 35, 0.15);
+      border-radius: 6px;
+      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+      box-sizing: border-box;
+      color: #24292E;
+      cursor: pointer;
+      display: inline-block;
+      font-family:"Zen Kurenaido", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      list-style: none;
+      padding: 6px 16px !important;
+      position: relative;
+      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      white-space: nowrap;
+      word-wrap: break-word;
+    }
+
+    .button-4:hover {
+      background-color: #F3F4F6;
+      text-decoration: none;
+      transition-duration: 0.1s;
+    }
+    
+    .button-4:disabled {
+      background-color: #FAFBFC;
+      border-color: rgba(27, 31, 35, 0.15);
+      color: #959DA5;
+      cursor: default;
+    }
+    
+    .button-4:active {
+      background-color: #EDEFF2;
+      box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+      transition: none 0s;
+    }
+    
+    .button-4:focus {
+      outline: 1px transparent;
+    }
+
+    .button-4:before {
+      display: none;
+    }
+    
+    .button-4:-webkit-details-marker {
+      display: none;
+    }
+    </style>
+    <style>
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 9px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+select:hover {
+  border-color: #aaa;
+}
+
+select:focus {
+  outline: none;
+  border-color: #555;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="bootstrap">
+      <p id="fixed-server-timer" class="contest-timer" style="opacity: 1;">2024-05-03 (金)<br>18:46:31 +09:00</p>
+    </div>
+    <a href="/">yuki youtubeへ</a>
+    <a href="javascript:var menu = document.querySelector('.menu'); menu.classList.toggle('active');" class="menu-toggle-button">メニュー</a>
+    <div class="menu">
+      <label for="darkmode">ダークモード:</label>
+      <input type="checkbox" id="darkmode" name="darkmode">
+      <label for="font">フォント:</label>
+      <select name="font" id="font-select">
+        <option value="">default</option>
+        <option value="Monospace">Monospace</option>
+        <option value="Arial">Arial</option>
+        <option value="Helvetica">Helvetica</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Zen Kurenaido">現代風フォント</option>
+      </select>
+      <label>Enterで送信</label>
+      <input type="checkbox" name="entersubmit" id="entersubmit" value="specific">
+    </div>
+    <div class="example4"></div>
+    <h1>Yuki BBS 改造インスタンス</h1>
+    <br>
+    <p>k41が作ったYuki BBSの改造インスタンスです。</p><br>
+    <a href="/bbs/howtouse">使い方</a>
+    <br>
+    <form id="form">
+      <p>下からからサーバーを選んでください</p>
+      <select name="server" id="server">
+        <option value="https://yukibbs-server.onrender.com/">メインサーバ</option>
+        <option value="https://yukibbs-kari.onrender.com/">仮サーバー</option>
+      </select>
+      <p>下からチャンネルを選んでください</p>
+      <select name="channel" id="channel">
+        <option value="main">雑談</option>
+        <option value="battle">バトスタ</option>
+      </select>
+      </select>
+      <br>
+      <br>
+      <div class="submit_menu">
+        <label for="name">名前</label>
+        <input type="text" id="name" value="" maxlength="40" required>　
+        <label for="seed">シード</label>
+        <input type="password" id="seed" value="" required>
+        <span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></span>
+        <span id="eyeText" onclick="pushHideButton()">表示する</span>
+        <br>
+      </div>
+      <br>
+      <label for="message">メッセージ</label>
+      <br>
+      <textarea name="message" rows="6" cols="100" maxlength="500" id="message" required></textarea>
+      <p></p>
+      <button id="btn" class="button-4" role="button" onclick="sendMessageByUser()">送信</button>
+      スピーカー以上のメッセージのみを表示<input type="checkbox" id="verify" name="verify">
+      <br><br><br>
+      <h2>投稿</h2>
+    </form>
+    <style>
+      button.anchor{
+        color: #000;
+        background-color: #fff;
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+      }
+      button.userIDAnchor{
+        color: #000;
+        background-color: #fff;
+        background: none;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+      }
+      table{
+        table-layout:fixed;
+        word-break:break-all;
+        word-wrap:break-all;
+        white-space: normal;
+        overflow-wrap: break-word;
+      }
+
+      
+.loader {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.truckWrapper {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: flex-end;
+  overflow-x: hidden;
+}
+/* truck upper body */
+.truckBody {
+  width: 130px;
+  height: fit-content;
+  margin-bottom: 6px;
+  animation: motion 1s linear infinite;
+}
+/* truck suspension animation*/
+@keyframes motion {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+/* truck's tires */
+.truckTires {
+  width: 130px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 10px 0px 15px;
+  position: absolute;
+  bottom: 0;
+}
+.truckTires svg {
+  width: 24px;
+}
+
+.road {
+  width: 100%;
+  height: 1.5px;
+  background-color: #282828;
+  position: relative;
+  bottom: 0;
+  align-self: flex-end;
+  border-radius: 3px;
+}
+.road::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background-color: #282828;
+  right: -50%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 10px solid white;
+}
+.road::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  background-color: #282828;
+  right: -65%;
+  border-radius: 3px;
+  animation: roadAnimation 1.4s linear infinite;
+  border-left: 4px solid white;
+}
+
+.lampPost {
+  position: absolute;
+  bottom: 0;
+  right: -90%;
+  height: 90px;
+  animation: roadAnimation 1.4s linear infinite;
+}
+
+@keyframes roadAnimation {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-350px);
+  }
+}
+
+    </style>
+  
+    <div id="result">loading...
+    <div class="loader">
+  <div class="truckWrapper">
+    <div class="truckBody">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 198 93"
+        class="trucksvg"
+      >
+        <path
+          stroke-width="3"
+          stroke="#282828"
+          fill="#F83D3D"
+          d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
+        ></path>
+        <path
+          stroke-width="3"
+          stroke="#282828"
+          fill="#7D7C7C"
+          d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
+        ></path>
+        <path
+          stroke-width="2"
+          stroke="#282828"
+          fill="#282828"
+          d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
+        ></path>
+        <rect
+          stroke-width="2"
+          stroke="#282828"
+          fill="#FFFCAB"
+          rx="1"
+          height="7"
+          width="5"
+          y="63"
+          x="187"
+        ></rect>
+        <rect
+          stroke-width="2"
+          stroke="#282828"
+          fill="#282828"
+          rx="1"
+          height="11"
+          width="4"
+          y="81"
+          x="193"
+        ></rect>
+        <rect
+          stroke-width="3"
+          stroke="#282828"
+          fill="#DFDFDF"
+          rx="2.5"
+          height="90"
+          width="121"
+          y="1.5"
+          x="6.5"
+        ></rect>
+        <rect
+          stroke-width="2"
+          stroke="#282828"
+          fill="#DFDFDF"
+          rx="2"
+          height="4"
+          width="6"
+          y="84"
+          x="1"
+        ></rect>
+      </svg>
+    </div>
+    <div class="truckTires">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 30 30"
+        class="tiresvg"
+      >
+        <circle
+          stroke-width="3"
+          stroke="#282828"
+          fill="#282828"
+          r="13.5"
+          cy="15"
+          cx="15"
+        ></circle>
+        <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 30 30"
+        class="tiresvg"
+      >
+        <circle
+          stroke-width="3"
+          stroke="#282828"
+          fill="#282828"
+          r="13.5"
+          cy="15"
+          cx="15"
+        ></circle>
+        <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+      </svg>
+    </div>
+    <div class="road"></div>
+
+    <svg
+      xml:space="preserve"
+      viewBox="0 0 453.459 453.459"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns="http://www.w3.org/2000/svg"
+      id="Capa_1"
+      version="1.1"
+      fill="#000000"
+      class="lampPost"
+    >
+      <path
+        d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
+c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
+c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16
+c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914
+h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75
+v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795
+V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0z
+M232.77,111.694c0,23.442-19.071,42.514-42.514,42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017
+h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
+      ></path>
+    </svg>
+  </div>
+</div>
+</div>
+    <script language="javascript">
+      function pushHideButton() {
+        var txtPass = document.getElementById("seed");
+        var btnEye = document.getElementById("buttonEye");
+        var eyeText = document.getElementById("eyeText");
+
+        if (txtPass.type === "text") {
+          txtPass.type = "password";
+          btnEye.className = "fa fa-eye";
+          eyeText.textContent = "表示する";
+        } else {
+          txtPass.type = "text";
+          btnEye.className = "fa fa-eye-slash";
+          eyeText.textContent = "非表示にする";
+        }
+      }
+    </script>
+  <script>
+    var $form = $("#form");
+    var $ta = $("#message");
+    var $entersubmit = $("#entersubmit");
+    
+　　　$(document).ready(function() {
+        var checkBox = $('#entersubmit');
+
+        checkBox.prop('checked', localStorage.getItem('entersubmit') === 'true');
+
+        checkBox.change(function() {
+          localStorage.setItem('entersubmit', $(this).prop('checked'));
+        });
+　　　　});
+      var entersubmit = localStorage.getItem('entersubmit') === 'true';
+      $('#entersubmit').prop('entersubmit', entersubmit);
+
+    
+      $('#entersubmit').change(function() {
+        var entersubmit = $(this).prop('checked');
+        localStorage.setItem('entersubmit', entersubmit.toString());
+        loadMessage();
+      });
+    
+    $(document).on("keydown", "#message", function(e) {
+          if ($entersubmit.is(":checked")) {
+            if (e.keyCode == 13 && !e.shiftKey) { 
+              e.preventDefault(); 
+              if ($ta.val().trim().length > 0) { 
+                sendMessageByUser(); 
+              }
+            }
+          }
+        });
+      
+    // ライトモード化
+    function toLightmode() {
+      $('body').css('background-color', 'white');
+      $('#modal').css('background-color', 'white');
+      $('textarea').css('background-color', 'white');
+      $('input').css('background-color', 'white');
+      $('body').css('color', 'black');
+      $('button').css('color', 'black');
+      $('textarea').css('color', 'black');
+      $('input').css('color', 'black');
+      $('a').css('color', 'black');
+      $('textarea').css('border', '1px solid black');
+      $('input').css('border', '1px solid black');
+    }
+      
+    // ダークモード化
+    function toDarkmode() {
+      $('body').css('background-color', 'black');
+      $('#modal').css('background-color', 'black');
+      $('textarea').css('background-color', 'black');
+      $('input').css('background-color', 'black');
+      $('body').css('color', 'white');
+      $('button').css('color', 'white');
+      $('textarea').css('color', 'white');
+      $('input').css('color', 'white');
+      $('a').css('color', 'white');
+      $('textarea').css('border', '1px solid white');
+      $('input').css('border', '1px solid white');
+    }
+      
+    // メッセージ送信
+    function sendMessage(name, seed, channel, message ,server) {
+      if (name=='' || seed=='' || channel=='' || message=='' || server=='') {
+        console.warn('Invalid argument(s).')
+      } else {
+        message = btoa(unescape(encodeURIComponent(message)));
+        $.ajax({
+          type: 'GET',
+          url: '/bbs/result',
+          data: {
+            'name': name,
+            'seed': seed,
+            'message': message,
+            'channel': channel,
+            'server':server
+          }
+        });
+        console.log(message, btoa(message))
+      }
+    }
+
+    //特定コマンド送信！
+    function AutoLink(str) {
+        var regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+        var regexp_makeLink = function (all, url, h, href) {
+          return '<a href="h' + href + '">' + url + "</a>";
+        };
+
+        return str.replace(regexp_url, regexp_makeLink);
+      }
+
+      function reloadmessageS() {
+        var xhr = new XMLHttpRequest();
+        xhr.open(
+          "GET",
+          "/bbs/api?channel=main&t=0&verify=false"
+        );
+        xhr.onload = function () {
+          if (xhr.status == 200) {
+            document.getElementById("messages").innerHTML = AutoLink(
+              xhr.responseText
+            );
+          }
+        };
+        xhr.send();
+      }
+    
+   //特定コマンド発動
+   function sendSpecificMessage(name, seed, channel, message, server) {
+        var send = new XMLHttpRequest();
+        send.open(
+          "GET",
+          `/bbs/results?name=${name}&message=${message}&seed=${seed}&channel=${channel}&server=${server}`
+          ,false
+        );
+        send.send().then(reloadmessageS());
+      }
+
+    
+    function sendMessageByUser() {
+      var name = $('#name').val();
+      var seed = $('#seed').val();
+      var message = $('#message').val();
+      var channel = $('#channel').val();
+      var server = $('#server').val();
+
+      if (/^\/instances$|^\/ip\s\d+|^\/genseeds$/.test(message)) {
+          sendSpecificMessage(name, seed, channel, message, server);
+      } else {
+          sendMessage(name, seed, channel, message, server);
+　　   }
+      $('#message').val("");
+　　　}
+
+    
+    
+    // メッセージ読み込み
+    var xhr;
+    function loadMessage() {
+      if (xhr && xhr.readyState !== 4) { xhr.abort(); }
+      
+      var channel = $('#channel').val();
+      var filter = $('#verify').prop('checked');
+      var server = $('#server').val();
+      
+      xhr = $.ajax({
+        type: 'GET',
+        url: '/bbs/api',
+        headers: { 'Accept': null },
+        xhrFields: {
+          withCredentials: true
+        },
+        data: {
+          'channel': channel,
+          'verify': filter,
+          'server':server,
+          't': 0
+        },
+        success: function(data) {
+          $('#result').html(data);
+          $('table tr').each(function() {
+            var firstTd = $(this).find('td:first');
+            var secondTd = $(this).find('td:eq(1)');
+            var thirdTd = $(this).find('td:eq(2)');
+            var number = firstTd.text();
+            var username = secondTd.html();
+            var thirdContent = thirdTd.text();
+            firstTd.css("width", "36px");
+            secondTd.css("width", "370px");
+            thirdTd.css("width", "670px");
+            
+            function escapeHtml(unsafe) {
+            return unsafe
+                 .replace(/&/g, "&amp;")
+                 .replace(/</g, "&nbsp;")
+                 .replace(/>/g, "&nbsp;")
+                 .replace(/"/g, "&quot;")
+                 .replace(/'/g, "&#039;");
+            }
+            
+            firstTd.html(`<button class="anchor" id="${number}">${number}</button>`);
+            secondTd.html(`<button class="userIDAnchor">${username}</button>`);
+            thirdTd.html(escapeHtml(thirdContent));
+          });
+    
+          $("#result").find("*").contents().each(function() {
+            if (this.nodeType === 3) {
+              var text = $(this).text();
+              var replacedText = text.replace(/≫(\d+) /g, "<a href='#$1'>$&</a>");
+              var urlRegex = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g; // ']))/;
+    　         if (urlRegex.test(text)) {
+                replacedText = replacedText.replace(urlRegex, function(all,url,h,href) {
+                  return '<a href="h' + href + '" target="_blank">' + url + "</a>";
+                });
+              }
+              $(this).replaceWith(replacedText);
+            }
+          });
+          $("#result").find("*").contents().each(function() {
+            if (this.nodeType === 3) {
+                var text = $(this).text();
+                const urlRegex = /^.*\/(?:watch\?)?(?:v=)?(?:feature=[a-z_]+&)?(?:v=)?([a-zA-Z0-9-_]{11,})(?:&feature=[a-z_]*)?(?:\?t=[0-9]+)?$/;
+                if (urlRegex.test(text)) {
+                    let replacedText = text.replace(urlRegex, function(url) {
+                        let match = url.match(urlRegex);
+                        if (match) {
+                            let videoId = match[1];
+                            return '<a href="/watch?v=' + videoId + '">' + url + '</a>';
+                        }
+                        return url;
+                    });
+                    $(this).replaceWith(replacedText);
+                }
+            }
+        });
+          $('.anchor').click(function() {
+            var currentMsg = $('#message').val();
+            $('#message').val(currentMsg + '≫' + $(this).text() + ' ');
+          });
+          $('.userIDAnchor').click(function() {
+            var currentMsg = $('#message').val();
+            var cmdRegex = /^\/(dis)?speaker|manager|moderator$/g;
+            if (currentMsg.match(cmdRegex)) { $('#message').val(currentMsg + ' ' + $(this).text()); } else { $('#message').val(currentMsg + $(this).text()); }
+          });
+          if (localStorage.getItem('darkmode') === 'true') { toDarkmode(); } else { toLightmode(); }
+        }
+      });
+    }
+    
+    // ネットワークコネクション検知
+    function updateConnectionStatus() {
+      var status = $('#status');
+      if (navigator.onLine) {
+        status.removeClass('offline').addClass('online');
+        status.text('online');
+      } else {
+        status.removeClass('online').addClass('offline');
+        status.text('offline');
+      }
+    }
+    
+    $(document).ready(function() {
+      updateConnectionStatus();
+      window.addEventListener('online', updateConnectionStatus);
+      window.addEventListener('offline', updateConnectionStatus);
+    
+      loadMessage();
+
+      var selectedserver = localStorage.getItem('server');
+      if (selectedserver) {
+        $('#server').val(selectedserver);
+      }
+      
+      $('#server').change(function() {
+        var newSelectedserver = $(this).val();
+        localStorage.setItem('server', newSelectedserver);
+        loadMessage();
+      });
+      
+      var selectedChannel = localStorage.getItem('channel');
+      if (selectedChannel) {
+        $('#channel').val(selectedChannel);
+      }
+      
+      $('#channel').change(function() {
+        var newSelectedChannel = $(this).val();
+        localStorage.setItem('channel', newSelectedChannel);
+        loadMessage();
+      });
+    
+      var isVerified = localStorage.getItem('verify') === 'true';
+      $('#verify').prop('checked', isVerified);
+    
+      $('#verify').change(function() {
+        var isVerified = $(this).prop('checked');
+        localStorage.setItem('verify', isVerified.toString());
+        loadMessage();
+      });
+    
+      var storedName = localStorage.getItem('name');
+      var storedSeed = localStorage.getItem('seed');
+    
+      if (storedName) {
+        $('#name').val(storedName);
+      }
+      if (storedSeed) {
+        $('#seed').val(storedSeed);
+      }
+      
+      $('#name').on('input', function() {
+        var newName = $(this).val();
+        localStorage.setItem('name', newName);
+      });
+      $('#seed').on('input', function() {
+        var newSeed = $(this).val();
+        localStorage.setItem('seed', newSeed);
+      });
+    
+        $('#openModal').click(function() {
+        $('#modalOverlay').fadeIn(300);
+        $('#modal').fadeIn(300);
+      });
+    
+      $('#closeModal').click(function() {
+        $('#modalOverlay').fadeOut(300);
+        $('#modal').fadeOut(300);
+      });
+      
+      var selectedFont = localStorage.getItem('font');
+      if (selectedFont) {
+        $('#font-select').val(selectedFont);
+        $('body').css('font-family', selectedFont);
+      }
+      
+      $('#font-select').change(function() {
+        var newSelectedFont = $(this).val();
+        localStorage.setItem('font', newSelectedFont);
+        $('body').css('font-family', newSelectedFont);
+      });
+      
+      var selectedFontSize = localStorage.getItem('font-size');
+      if (selectedFontSize) {
+        $('#font-size').val(selectedFontSize);
+        $('body').css('font-size', `${selectedFontSize}px`);
+        $('#font-size-val').text(`${selectedFontSize}px`);
+      }
+      
+      $('#font-size').change(function() {
+        var newFontSize = $(this).val();
+        localStorage.setItem('font-size', newFontSize)
+        $('body').css('font-size', `${newFontSize}px`);
+        $('#font-size-val').text(`${newFontSize}px`);
+      });
+    
+      var isDarkmode = localStorage.getItem('darkmode') === 'true';
+      $('#darkmode').prop('checked', isDarkmode);
+    
+      $('#darkmode').change(function() {
+        var isDarkmode = $(this).prop('checked');
+        localStorage.setItem('darkmode', isDarkmode.toString());
+        if (isDarkmode) { toDarkmode(); } else { toLightmode(); }
+      });
+      if (isDarkmode) { toDarkmode(); } else { toLightmode(); }
+    
+      loadMessage();
+      setInterval(function() { loadMessage(); }, 5000);
+    });
+  </script>
+  <script src="data:text/javascript;base64,KGZ1bmN0aW9uKCkgewogICAgbGV0IHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ3NjcmlwdCcpOyAKICAgIHNjcmlwdC5zcmM9Imh0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9ucG0vZXJ1ZGEiOyAKICAgIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoc2NyaXB0KTsgCiAgICBzY3JpcHQub25sb2FkID0gZnVuY3Rpb24gKCkgeyBlcnVkYS5pbml0KCkgfSAKfSkoKTs="></script>
+  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
+</body>
+</html>
